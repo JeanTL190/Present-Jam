@@ -66,6 +66,8 @@
     <Compile Include="Assets\Scripts\EnemyController.cs" />
     <Compile Include="Assets\Scripts\NoelMovement.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
+    <Compile Include="Assets\Scripts\PresentBehavior.cs" />
+    <Compile Include="Assets\Scripts\PresentSpawn.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/Users/Particular/Desktop/Dev-U/Present Jam/A Christmas Gift/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
