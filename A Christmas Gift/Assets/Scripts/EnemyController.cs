@@ -33,7 +33,7 @@ public void Die(){
 
     if(enemyHealth <= 0)
     {
-        Destroy(this.GameObject);
+        Destroy(this.gameObject);
     }
 
 }
