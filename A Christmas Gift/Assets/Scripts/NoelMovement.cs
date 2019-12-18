@@ -4,66 +4,36 @@ using UnityEngine;
 
 public class NoelMovement : MonoBehaviour
 {
-    [SerializeField] float VelMax = 1f;
-    [SerializeField] float acel = 1f;
-    [SerializeField] float desac = 1f;
-    [SerializeField] float angularVel = 1f;
-    private float xAxis;
-    private float yAxis;
-    private float VelAtual;
-    private Rigidbody rb;
+    [SerializeField] private int vida = 100;
+    [SerializeField] private int damage;
+    [SerializeField] private float moveSpeed = 5f;
+    [SerializeField] private Rigidbody2D rb;
 
-    void Start()
-    {
-        rb = GetComponent<Rigidbody>();
-    }
-
+    Vector2 movement;
     // Update is called once per frame
     void Update()
     {
-        xAxis = Input.GetAxis("Vertical");
-        yAxis = Input.GetAxis("Horizontal");
-
-        if (xAxis != 0)
-        {
-            VelAtual += (xAxis * acel);
-            ClampVelocity(VelAtual);
-        }
-        else
-        {
-            Stoped();
-            ClampVelocity(VelAtual);
-        }
-        if (yAxis != 0)
-        {
-            Rotate(transform, yAxis * angularVel);
-        }
+        movement.x = Input.GetAxisRaw("Horizontal");
+        movement.y = Input.GetAxisRaw("Vertical");
     }
 
-    private void ClampVelocity(float vel)
+    private void FixedUpdate()
     {
-        float x = Mathf.Clamp(vel, -VelMax, VelMax);
-        rb.velocity = transform.up * x;
-        VelAtual = x;
+        rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
     }
-    private void Stoped()
+    private void Die()
     {
-        if (VelAtual != 0)
+        if (vida < 0)
         {
-            if (VelAtual > 0)
-            {
-                VelAtual -= desac;
-                VelAtual = Mathf.Clamp(VelAtual, 0, VelMax);
-            }
-            else if (VelAtual < 0)
-            {
-                VelAtual += desac;
-                VelAtual = Mathf.Clamp(VelAtual, -VelMax, 0);
-            }
+            // Chama animacao de morte e cena de game over
         }
     }
-    private void Rotate(Transform t, float angulo)
+    private void Atack()
     {
-        t.Rotate(0, 0 , angulo);
+        // animacao de atk
+    }
+    private void TookDamege()
+    {
+        //animacao de dano
     }
 }
