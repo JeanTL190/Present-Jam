@@ -10,7 +10,7 @@ public class Attack : MonoBehaviour
     {
         //Enemy enemy = other.GetComponent<Enemy>();
         NoelMovement player = other.GetComponent<NoelMovement>();
-        if(enemy!=null)
+       // if(enemy!=null)
         {
             //enemy.TookDamage(damage);
         }
