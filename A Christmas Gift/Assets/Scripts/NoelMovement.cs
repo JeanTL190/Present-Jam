@@ -7,6 +7,7 @@ public class NoelMovement : MonoBehaviour
     [SerializeField] private int vida = 100;
     [SerializeField] private float speed = 5f;
     [SerializeField] private Rigidbody2D rb;
+    [SerializeField] Animator animacao;
     private float moveSpeed;
     Vector2 movement;
     Vector2 posicaoAtual;
@@ -42,7 +43,11 @@ public class NoelMovement : MonoBehaviour
                 posicaoAtual = new Vector2(-1, 0);
             }
         }
-        
+        animacao.SetFloat("Horizontal", movement.x);
+        animacao.SetFloat("Vertical", movement.y);
+        animacao.SetFloat("Speed", movement.sqrMagnitude);
+        animacao.SetFloat("PosiHorizontal", posicaoAtual.x);
+        animacao.SetFloat("PosiVertical", posicaoAtual.y);
     }
 
     private void FixedUpdate()
@@ -64,27 +69,7 @@ public class NoelMovement : MonoBehaviour
     }
     private void Atack()
     {
-        if (posicaoAtual.x != 0)
-        {
-            if (posicaoAtual.x > 0)
-            {
-                // ativa animacao de golpe a direita;
-            }
-            else
-            {
-                // ativa animacao de golpe a esquerda;
-            }
-        }
-        else {
-            if(posicaoAtual.y>0)
-            {
-                //ativa animacao de golpe pra cima;
-            }
-            else
-            {
-                //ativa golpe para baixo;
-            }
-        }
+        animacao.SetTrigger("Atack");
     }
     public void TookDamage(int damage)
     {
