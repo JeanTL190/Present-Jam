@@ -319,8 +319,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   vida: 100
-  damage: 0
-  moveSpeed: 5
+  speed: 5
   rb: {fileID: 912666941}
 --- !u!1 &1347579462
 GameObject:
