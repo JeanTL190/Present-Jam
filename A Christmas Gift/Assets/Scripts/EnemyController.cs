@@ -11,23 +11,20 @@ public float damageTaken;
 
 public PlayerController player;
 
-public void Attack(){
+float dirX;
 
-    ///TODO: Spawnar animação de ataque e tirar vida do player
+[SerializeField]
+float moveSpeed = 3f;
 
-}
+Rigidbody2D rb;
 
-private void OnTriggerEnter(Collider other) {
-    if(other.tag == "Player"){
+bool facingRight = false;
 
-        Attack();
+Vector3 localScale;
 
-    }else if( other.tag == "PlayerAttack"){
+public static bool isAttacking = false;
 
-        enemyHealth -= damageTaken;
-
-    }
-}
+Animator anim;
 
 public void Die(){
 
@@ -38,4 +35,52 @@ public void Die(){
 
 }
 
+	// Use this for initialization
+	void Start () {
+		localScale = transform.localScale;
+		rb = GetComponent<Rigidbody2D> ();
+		dirX = -1f;
+
+		anim = GetComponent<Animator> ();
+	}
+
+	// Update is called once per frame
+	void Update () {
+		if (transform.position.x < -9f)
+			dirX = 1f;
+		else if (transform.position.x > 9f)
+			dirX = -1f;
+
+		if (isAttacking)
+			anim.SetBool ("isAttacking", true);
+		else
+			anim.SetBool ("isAttacking", false);
+			
+	}
+
+	void FixedUpdate()
+	{
+        if (!isAttacking)
+            rb.velocity = new Vector2(dirX * moveSpeed, rb.velocity.y);
+        else
+            rb.velocity = Vector2.zero;
+	}
+
+	void LateUpdate()
+	{
+		CheckWhereToFace ();
+	}
+
+	void CheckWhereToFace()
+	{
+		if (dirX > 0)
+			facingRight = true;
+		else if (dirX < 0)
+			facingRight = false;
+
+		if (((facingRight) && (localScale.x < 0)) || ((!facingRight) && (localScale.x > 0)))
+			localScale.x *= -1;
+
+		transform.localScale = localScale;
+	}
 }
