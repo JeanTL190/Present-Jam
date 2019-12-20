@@ -8,9 +8,12 @@ public class NoelMovement : MonoBehaviour
     [SerializeField] private float speed = 5f;
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] Animator animacao;
+    [SerializeField] int municao = 10;
+    [SerializeField] Transform[] shotPosition;
+    [SerializeField] GameObject bolaDeNeve;
     private float moveSpeed;
     Vector2 movement;
-    Vector2 posicaoAtual;
+    Vector2 posicaoAtual = new Vector2(0,1);
     private void Start()
     {
         moveSpeed = speed;
@@ -57,13 +60,18 @@ public class NoelMovement : MonoBehaviour
         {
             Atack();
         }
+        if(Input.GetButtonDown("Shoot X"))
+        {
+            if(municao>0)
+                Atirar();
+        }
     }
 
-    private void zeroSpeed()
+    private void ZeroSpeed()
     {
         moveSpeed = 0;
     }
-    private void resetSpeed()
+    private void ResetSpeed()
     {
         moveSpeed = speed;
     }
@@ -78,6 +86,48 @@ public class NoelMovement : MonoBehaviour
         if (vida < 0)
         {
             // Chama animacao de morte e cena de game over
+        }
+    }
+    public void Reload(int munition)
+    {
+        municao += munition;
+    }
+    public void AtualizaMunicao(int munition)
+    {
+        municao = munition;
+    }
+    public int GetMunicao()
+    {
+        return municao;
+    }
+    public Vector2 getPosicaoAtual()
+    {
+        return posicaoAtual;
+    }
+    private void Atirar()
+    {
+        municao--;
+        if (posicaoAtual.x != 0)
+        {
+            if (posicaoAtual.x > 0)
+            {
+                Instantiate(bolaDeNeve, shotPosition[2].position, transform.rotation);
+            }
+            else
+            {
+                Instantiate(bolaDeNeve, shotPosition[3].position, transform.rotation);
+            }
+        }
+        else 
+        {
+            if (posicaoAtual.y > 0)
+            {
+                Instantiate(bolaDeNeve, shotPosition[0].position, transform.rotation);
+            }
+            else
+            {
+                Instantiate(bolaDeNeve, shotPosition[1].position, transform.rotation);
+            }
         }
     }
 }
