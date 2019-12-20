@@ -18,7 +18,7 @@ public class PresentBehavior : MonoBehaviour
 
     public void TookDamage(int damage)
     {
-        health = damage;
+        health -= damage;
         if (health <= 0)
         {
             Destroy(this.gameObject);
