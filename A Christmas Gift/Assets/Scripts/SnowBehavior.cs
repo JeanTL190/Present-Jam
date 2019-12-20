@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class SnowBehavior : MonoBehaviour
 {
+    [SerializeField] float timeLife = 10f;
+    private void Start()
+    {
+        StartCoroutine("Despawn");
+    }
     private void OnTriggerEnter(Collider other)
     {
         NoelMovement player = other.GetComponent<NoelMovement>();
@@ -13,5 +18,10 @@ public class SnowBehavior : MonoBehaviour
             Debug.Log("Cheguei");
         }
 
+    }
+    IEnumerator Despawn()
+    {
+        yield return new WaitForSeconds(timeLife);
+            Destroy(this.gameObject);
     }
 }
