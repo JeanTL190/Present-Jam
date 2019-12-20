@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class NoelMovement : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class NoelMovement : MonoBehaviour
     [SerializeField] int municao = 10;
     [SerializeField] Transform[] shotPosition;
     [SerializeField] GameObject bolaDeNeve;
+    [SerializeField] Text muniText;
+    private string qtMunicao = "SnowBalls: ";
     private float moveSpeed;
     Vector2 movement;
     Vector2 posicaoAtual = new Vector2(0,1);
@@ -51,6 +54,7 @@ public class NoelMovement : MonoBehaviour
         animacao.SetFloat("Speed", movement.sqrMagnitude);
         animacao.SetFloat("PosiHorizontal", posicaoAtual.x);
         animacao.SetFloat("PosiVertical", posicaoAtual.y);
+        muniText.text = qtMunicao + municao.ToString();
     }
 
     private void FixedUpdate()
