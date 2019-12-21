@@ -43,10 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80f4023daf46bc546860fd6dc9082092, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxX: 10
-  maxY: 5
-  minX: -10
-  minY: -5
+  position: {fileID: 5074976772897111728}
   timeSpawn: 5
   presentes:
   - {fileID: 7556201524737213467, guid: 9de6176daa54bca45b5a5f08597cb4f4, type: 3}
