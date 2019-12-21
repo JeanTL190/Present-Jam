@@ -4,10 +4,7 @@ using UnityEngine;
 
 public class PresentSpawn : MonoBehaviour
 {
-    [SerializeField] float maxX;
-    [SerializeField] float maxY;
-    [SerializeField] float minX;
-    [SerializeField] float minY;
+    public GameObject position;
     [SerializeField] float timeSpawn=5f;
     [SerializeField] GameObject[] presentes;
 
@@ -21,7 +18,7 @@ public class PresentSpawn : MonoBehaviour
         while (true) {
             yield return new WaitForSeconds(timeSpawn);
             GameObject instacia = presentes[Random.Range(0, presentes.Length - 1)];
-            instacia.transform.position = new Vector2(Random.Range(minX, maxX), Random.Range(minY, maxY));
+            instacia.transform.position = new Vector2(position.transform.position.x, position.transform.position.y);
 
             Instantiate(instacia);
         }
